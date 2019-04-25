@@ -5,29 +5,35 @@ import StatelessComponent from './StatelessComponent';
 import StatefulComponent from './StatefulComponent'
 class App extends Component {
 
-    evento(e){
-        alert(e.target.value)
-    }
-    render() {
-        let calculo = 1 + 1009;
+    constructor(args){
+        super(args)
 
-        let style = null;
-        if(calculo == 10){
-            style = {color:'red'}
-        } else {
-            style = {color:'green'}
+        this.state = {
+            counter: 32
         }
+    }
+
+    sumar() {
+        this.setState({
+            counter: this.state.counter+1
+        })
+    }
+    
+    restar() {
+        this.setState({
+            counter: this.state.counter-1
+        })
+    }    
+
+    render() {
 
         return (  
             <div>
-              <h1>hola</h1>          
-              <input 
-              onClick={this.evento.bind(this)} 
-              type="txt" 
-              value="hola mundo" 
-              className="green"
-              style={style}/>
-              {calculo == 10 ? "10":"no 10"}
+                <span>Contador {this.state.counter} </span>
+                <div>
+                    <button onClick={this.sumar.bind(this)}> + </button>
+                    <button onClick={this.restar.bind(this)}> - </button>
+                </div>
             </div>
         );
       }
