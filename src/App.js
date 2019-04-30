@@ -18,6 +18,7 @@ class App extends Component {
         const telInput = document.getElementById('tel');
 
         let newUser = {
+            id: new Date().getTime(),
             name: nameInput.value,
             role: roleInput.value,
             tel: telInput.value
@@ -26,11 +27,7 @@ class App extends Component {
         
         let users = this.state.users;
 
-        console.log(users);
-
         users.unshift(newUser);
-
-        console.log(users);     
 
         this.setState({users:users});
 
