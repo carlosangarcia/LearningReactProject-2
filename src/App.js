@@ -6,78 +6,80 @@ class App extends Component {
 
     constructor(args){
         super(args)
-
         this.state = {
-            users: []
+         username:'',
+         name:'',
+         language:'',
+         gender:'',
+         about:'',
+         accept:''
         }
     }
-
-    add(e){
-        const nameInput = document.getElementById('name');
-        const roleInput = document.getElementById('role');
-        const telInput = document.getElementById('tel');
-
-        let newUser = {
-            id: new Date().getTime(),
-            name: nameInput.value,
-            role: roleInput.value,
-            tel: telInput.value
-        }
-        console.log(newUser);
-        
-        let users = this.state.users;
-
-        users.unshift(newUser);
-
-        this.setState({users:users});
-
-        nameInput.value = '';
-        roleInput.value = '';
-        telInput.value = '';
-
-    }  
-
-    delete(id){
-        console.log("delete =>");
-
-        let userIndex = this.state.users.map(x => {return x.id}).indexOf(id)
-
-        let users = this.state.users
-
-        users.splice(userIndex, 1)
-
+    onChange(e) {
+        if(e.target.name ==="accept"){
+            this.setState({
+                [e.target.name]:e.target.checked
+            })
+        } else {
         this.setState({
-          users: users
+            [e.target.name]:e.target.value
         })
+      }
     }
-
 
     render() {
 
         return (  
             <div>
-                <label>Nombre</label>
-                <input id="name" type="text" />
+                <label htmlFor="username">Nombre de usuario</label> 
+                <input 
+                    name="username" 
+                    id="username" 
+                    value = {this.state.username} 
+                    onChange={this.onChange.bind(this)}
+                    type="text" />
 
-                <label>Rol</label>
-                <input id="role" type="text" />
+                <label htmlFor="nombre">Nombre persona</label> 
+                <input 
+                    name="name" 
+                    id="name" 
+                    value = {this.state.name} 
+                    onChange={this.onChange.bind(this)}
+                    type="text" />
+                <label htmlFor="language">Idioma</label>
+                <select 
+                  id="language" 
+                  name="language" 
+                  value={this.state.language}
+                  onChange={this.onChange.bind(this)}>
+                    <option value="">Seleccione un valor</option>
+                    <option value="en">Inglés</option>
+                    <option value="es">Español</option>
+                    <option value="de">Alemán</option>
+                </select>    
 
-                <label>Tel</label>
-                <input id="tel" type="text" />
+                <label htmlFor="gender">Genero</label>
+                <input type="radio" name="gender" value="m" onChange={this.onChange.bind(this)}/>Hombre
+                <input type="radio" name="gender" value="w" onChange={this.onChange.bind(this)}/>Mujer
 
-                <button onClick={this.add.bind(this)}>Agregar</button>
-
-                <ul>
-                    {this.state.users.map(user => {
-                        return <Item key={user.id}
-                            id={user.id}
-                            user={user}
-                            deleteOp={this.delete.bind(this)}
-                            />
-
-                    })}
-                </ul>
-
+                <label htmlFor="about">Cuéntanos algo de ti</label>
+                <textarea
+                    id="about"
+                    name="about"
+                    value={this.state.about}
+                    onChange={this.onChange.bind(this)}>
+                </textarea>    
+                <div>
+                <input
+                    id="accept"
+                    name="accept"
+                    type="checkbox"
+                    value={this.state.accept}
+                    onChange={this.onChange.bind(this)}/>Acepta condiciones de uso
+                </div>
+                <div>
+                <span>{JSON.stringify(this.state)}</span>
+                </div>
            </div>
         );
       }
