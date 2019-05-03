@@ -7,48 +7,19 @@ class App extends Component {
     constructor(args){
         super(args)
 
-        this.state = {
-            users: []
+        this.state = {            
+            username:"",
+            name:"",
+            language:"es",
+            about:""
         }
     }
 
-    add(e){
-        const nameInput = document.getElementById('name');
-        const roleInput = document.getElementById('role');
-        const telInput = document.getElementById('tel');
-
-        let newUser = {
-            id: new Date().getTime(),
-            name: nameInput.value,
-            role: roleInput.value,
-            tel: telInput.value
-        }
-        console.log(newUser);
-        
-        let users = this.state.users;
-
-        users.unshift(newUser);
-
-        this.setState({users:users});
-
-        nameInput.value = '';
-        roleInput.value = '';
-        telInput.value = '';
-
-    }  
-
-    delete(id){
-        console.log("delete =>");
-
-        let userIndex = this.state.users.map(x => {return x.id}).indexOf(id)
-
-        let users = this.state.users
-
-        users.splice(userIndex, 1)
-
-        this.setState({
-          users: users
-        })
+    onChange(e){
+     this.setState(
+     {
+        [e.target.name]:e.target.value
+     })   
     }
 
 
@@ -56,28 +27,43 @@ class App extends Component {
 
         return (  
             <div>
-                <label>Nombre</label>
-                <input id="name" type="text" />
+                <label htmlFor="username">Nombre de usuario</label>
+                <input 
+                    id="username" name="username" 
+                    value={this.state.username} 
+                    type="text"
+                    onChange={this.onChange.bind(this)} />
 
-                <label>Rol</label>
-                <input id="role" type="text" />
 
-                <label>Tel</label>
-                <input id="tel" type="text" />
+                <label htmlFor="name">Nombre de persona</label>
+                <input id="name" 
+                name="name" 
+                value={this.state.name} 
+                type="text" 
+                onChange={this.onChange.bind(this)}/>
 
-                <button onClick={this.add.bind(this)}>Agregar</button>
+                <label htmlFor="language">Idioma</label>
+                <select id="language" 
+                  name="language" 
+                  value={this.state.language}
+                  onChange={this.onChange.bind(this)}>
+                    <option value="">Seleccione un valor</option>
+                    <option value="en">Inglés</option>
+                    <option value="es">Español</option>
+                    <option value="de">Alemán</option>
 
-                <ul>
-                    {this.state.users.map(user => {
-                        return <Item key={user.id}
-                            id={user.id}
-                            user={user}
-                            deleteOp={this.delete.bind(this)}
-                            />
+                </select>
 
-                    })}
-                </ul>
+                <label htmlFor="gender">Genero</label>
+                <input type="radio" name="gender" value="h" onChange={this.onChange.bind(this)}/>Hombre
+                <input type="radio" name="gender" value="w" onChange={this.onChange.bind(this)}/>Mujer
 
+                <label htmlFor="about">Cuentanos algo sobre ti</label>                
+                <textarea id="about" name="about" value={this.state.about} onChange={this.onChange.bind(this)}>
+                
+                </textarea>
+                <p> {JSON.stringify(this.state)}
+                </p>
            </div>
         );
       }
