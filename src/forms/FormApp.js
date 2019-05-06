@@ -10,7 +10,8 @@ class FormApp extends React.Component {
             gender:'m',
             about:'soy nuevo',
             accept:true,            
-            message:''
+            message:'',
+            messageColor:''
         }
     }
     
@@ -32,14 +33,16 @@ class FormApp extends React.Component {
         }
 
         this.setState({
-            message:"Guardado correctamente"
+            message:"Guardado correctamente",
+            messageColor:"green"
         })
     }
 
     validate(){
         if(this.state.accept != true){
             this.setState({
-                message:"Acepte términos y condiciones"
+                message:"Acepte términos y condiciones",
+                messageColor:"red"
             });            
             return false;
         } else {            
@@ -102,7 +105,8 @@ class FormApp extends React.Component {
 
                 </div>
                     <button onClick={this.onSave.bind(this)}>Guardar</button>
-                    <span style={{color:'green'}}>{this.state.message}</span>
+                    <span style={{color:this.state.messageColor}}>{this.state.message}</span>
+                <br/><br/><br/><br/>
                 <div>
                 <span>{JSON.stringify(this.state)}</span>
                 </div>
