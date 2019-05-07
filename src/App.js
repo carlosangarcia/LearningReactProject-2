@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import Item from './Item';
-import FormApp from './forms/FormApp'
+//import Item from './Item';
+import TodoApp from './lifecycle/TodoApp.js'
 
 class App extends Component {
 
     render() {
 
         return (  
-            <FormApp/>
+            <TodoApp/>
         );
       }
     }
