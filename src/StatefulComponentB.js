@@ -1,6 +1,8 @@
 import React from 'react'
 
 const StatefulComponentB = ({props}) => {
+
+//function StatefulComponentB ({props}) {
     return(
         <h1>hello world desde StatefulComponentB</h1>
         )
