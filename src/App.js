@@ -15,6 +15,9 @@ class App extends Component {
 
     evento2(){
         alert('evento2')
+        alert(e.target.value);
+        console.log(this);
+        //this.evento2();
     }
 
     render(){

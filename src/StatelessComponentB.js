@@ -8,7 +8,7 @@ class StatelesComponentB extends React.Component{
 
     render(){
         return(
-            <h1>Hola mundo desde statelessComponenteB</h1>
+            <h3>Hola mundo desde statelessComponenteB</h3>
         )
     }
 }
