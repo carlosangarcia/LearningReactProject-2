@@ -15,14 +15,16 @@ class App extends Component {
 
     evento2(){
         alert('evento2')
-        alert(e.target.value);
+        
         console.log(this);
         //this.evento2();
     }
 
     render(){
-        let calculo = 2 + 8;
-        let style = {color:'red',backgroundColor:'blue'};
+        let calculo = 11;
+        
+        let style = (calculo == 10 ? {color:'red',backgroundColor:'blue'} : {color:'green',backgroundColor:'red'});
+
         return (
             <div>
                 <h1>hola mundo jsx</h1>
